@@ -14,7 +14,7 @@ const PROJECTS = [
     date: "2026",
     summary: "A front hub redesign for SDSU's Baja SAE car: 35% lighter, with a factor of safety of about 1.9.",
     description: [
-      "Team: Ryan Young, Johnny Leko, and Sam Turner, San Diego State University.",
+      "Designed by Samuel Turner, San Diego State University.",
 
       "## Abstract",
       "The front hub is a critical component of the Baja SAE front suspension system because it connects the wheel and brake rotor to the upright through the bearings. It carries vertical wheel loads, cornering forces, and braking torque from the rotor. Because the hub is located within the unsprung portion of the suspension, its mass has a significant effect on vehicle performance. Reducing unsprung mass allows the suspension to respond more quickly to changes in terrain and helps the tire maintain contact with the ground, while also lowering rotational inertia. This can improve traction, ride quality, acceleration, braking, and handling.",
