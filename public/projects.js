@@ -13,7 +13,6 @@ const PROJECTS = [
     summary: "Placeholder. This will be replaced with a real project.",
     description:
       "This is a placeholder so you can see how a project looks.\n\nReal projects will have photos of the build and a write-up explaining what it is, how it works, and how it was made.",
-    tags: ["Mechanical", "CAD"],
     images: ["images/sample-1.svg", "images/sample-2.svg"],
   },
 ];
