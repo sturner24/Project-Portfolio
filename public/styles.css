@@ -170,6 +170,8 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
 .p-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; }
 .p-head h2 { font-size: clamp(2.4rem, 7vw, 6.5rem); font-weight: 500; letter-spacing: -0.045em; line-height: 0.98; }
 .p-summary { font-family: var(--serif); font-size: clamp(1.3rem, 2.2vw, 1.9rem); line-height: 1.3; color: var(--muted); margin-top: 20px; max-width: 760px; }
+.p-summary a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; transition: color 0.2s; }
+.p-summary a:hover { color: var(--ink); }
 
 .p-cover { display: flex; align-items: center; gap: clamp(12px, 1.5vw, 24px); }
 .p-cover img { flex: 1 1 0; min-width: 0; max-height: 75vh; object-fit: contain; border-radius: 4px; }

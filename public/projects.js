@@ -1,7 +1,8 @@
 /* Portfolio projects.
  * Each project needs a title; everything else is optional.
  *   date:        "YYYY-MM" or "YYYY" (used for sorting, newest first)
- *   summary:     one line shown on the card
+ *   summary:     one line shown under the title
+ *   link:        { text, url } shown under the title instead of the summary
  *   description: full write-up; leave a blank line between paragraphs,
  *                start a paragraph with "## " to make it a heading, and
  *                use lines like ![caption](images/x.jpg) for a row of pictures
@@ -13,7 +14,7 @@ const PROJECTS = [
   {
     title: "Front Wheel Hub - Aztec Baja SAE",
     date: "2026",
-    summary: "A front hub redesign for SDSU's Baja SAE car: 35% lighter, with a factor of safety of about 1.9.",
+    link: { text: "Design and Analysis Document", url: "https://docs.google.com/document/d/1h5J4Y049qhrv9gAKvjsVQRw1gDm4BPb-f--DrF9E1Yo/view" },
     description: [
       "Designed by Samuel Turner, San Diego State University.",
 

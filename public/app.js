@@ -69,8 +69,10 @@ function openProject(n, { push = true } = {}) {
   $("#pIndex").textContent = `${pad(n + 1)} / ${pad(projects.length)}`;
   $("#pMeta").textContent = [formatDate(p.date), p.tags.join(", ")].filter(Boolean).join("  ·  ");
   $("#pTitle").textContent = p.title;
-  $("#pSummary").textContent = p.summary || "";
-  $("#pSummary").hidden = !p.summary;
+  $("#pSummary").innerHTML = p.link
+    ? `<a href="${escapeHTML(p.link.url)}" target="_blank" rel="noopener">${escapeHTML(p.link.text)} ↗</a>`
+    : escapeHTML(p.summary || "");
+  $("#pSummary").hidden = !p.link && !p.summary;
 
   const covers = p.images.slice(0, p.cover || 1);
   const rest = p.images.slice(covers.length);
