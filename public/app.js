@@ -20,6 +20,7 @@ const escapeHTML = (str = "") =>
 const formatDate = (ym, opts = { month: "long", year: "numeric" }) => {
   if (!ym) return "";
   const [y, m] = ym.split("-");
+  if (!m) return y;
   return new Date(+y, +m - 1).toLocaleDateString(undefined, opts);
 };
 
