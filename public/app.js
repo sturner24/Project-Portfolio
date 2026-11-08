@@ -79,13 +79,6 @@ function openProject(n, { push = true } = {}) {
     .join("");
   $("#pCover").hidden = !covers.length;
 
-  const facts = [
-    ["Date", formatDate(p.date)],
-    ["Discipline", p.tags.join(", ")],
-    ["Photos", p.images.length ? String(p.images.length) : ""],
-  ].filter(([, v]) => v);
-  $("#pFacts").innerHTML = facts.map(([k, v]) => `<dl><dt>${k}</dt><dd>${escapeHTML(v)}</dd></dl>`).join("");
-
   $("#pDesc").innerHTML = (p.description || "")
     .split(/\n{2,}/)
     .filter(Boolean)
