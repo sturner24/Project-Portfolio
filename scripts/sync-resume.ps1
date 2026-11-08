@@ -1,5 +1,5 @@
 # Copies the newest Resume.pdf from Downloads into the site and pushes it.
-# Run by the "Portfolio Resume Sync" scheduled task every few minutes.
+# Run manually after downloading a new Resume.pdf.
 
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -24,9 +24,17 @@ try {
       (Get-FileHash $newest.FullName).Hash -eq (Get-FileHash $target).Hash) { exit 0 }
 
   Copy-Item $newest.FullName $target -Force
+
+  # Version the link so browsers don't show a cached old copy.
+  $ver = (Get-FileHash $target).Hash.Substring(0, 8).ToLower()
+  $index = Join-Path $repo 'public\index.html'
+  $html = [IO.File]::ReadAllText($index)
+  $html = $html -replace 'href="Resume\.pdf(\?v=[0-9a-f]+)?"', "href=`"Resume.pdf?v=$ver`""
+  [IO.File]::WriteAllText($index, $html)
+
   Set-Location $repo
-  git add -- public/Resume.pdf
-  git commit -q -m "Update resume" -- public/Resume.pdf
+  git add -- public/Resume.pdf public/index.html
+  git commit -q -m "Update resume" -- public/Resume.pdf public/index.html
   if ($LASTEXITCODE -ne 0) { throw "git commit failed" }
   git push -q
   if ($LASTEXITCODE -ne 0) { throw "git push failed" }
