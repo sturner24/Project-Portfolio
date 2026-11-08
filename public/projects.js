@@ -5,6 +5,7 @@
  *   description: full write-up; leave a blank line between paragraphs
  *   tags:        shown on the card and used as filters
  *   images:      paths inside the images/ folder; the first one is the cover
+ *   cover:       how many of the first images to show side by side at the top (default 1)
  */
 const PROJECTS = [
   {
@@ -13,6 +14,7 @@ const PROJECTS = [
     summary: "Placeholder. This will be replaced with a real project.",
     description:
       "This is a placeholder so you can see how a project looks.\n\nReal projects will have photos of the build and a write-up explaining what it is, how it works, and how it was made.",
-    images: ["images/front-wheel-hub-1.png"],
+    images: ["images/front-wheel-hub-1.png", "images/front-wheel-hub-fos.png"],
+    cover: 2,
   },
 ];

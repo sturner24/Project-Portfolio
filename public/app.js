@@ -72,9 +72,12 @@ function openProject(n, { push = true } = {}) {
   $("#pSummary").textContent = p.summary || "";
   $("#pSummary").hidden = !p.summary;
 
-  const [cover, ...rest] = p.images;
-  $("#pCover").innerHTML = cover ? `<img src="${escapeHTML(cover)}" alt="${escapeHTML(p.title)}" />` : "";
-  $("#pCover").hidden = !cover;
+  const covers = p.images.slice(0, p.cover || 1);
+  const rest = p.images.slice(covers.length);
+  $("#pCover").innerHTML = covers
+    .map((src) => `<img src="${escapeHTML(src)}" alt="${escapeHTML(p.title)}" />`)
+    .join("");
+  $("#pCover").hidden = !covers.length;
 
   const facts = [
     ["Date", formatDate(p.date)],
@@ -90,7 +93,7 @@ function openProject(n, { push = true } = {}) {
     .join("");
 
   $("#pGallery").innerHTML = rest
-    .map((src, i) => `<img src="${escapeHTML(src)}" alt="${escapeHTML(p.title)} photo ${i + 2}" loading="lazy" />`)
+    .map((src, i) => `<img src="${escapeHTML(src)}" alt="${escapeHTML(p.title)} photo ${i + covers.length + 1}" loading="lazy" />`)
     .join("");
 
   const next = projects[(n + 1) % projects.length];
