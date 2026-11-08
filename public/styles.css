@@ -81,6 +81,7 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; }
   transition: border-color 0.3s var(--ease);
 }
 .resume-link:hover { border-color: var(--ink); }
+.hero-links { display: inline-flex; gap: 24px; flex-wrap: wrap; }
 
 /* ---------- Project index ---------- */
 .work { padding: clamp(48px, 9vh, 100px) var(--pad) 80px; }
