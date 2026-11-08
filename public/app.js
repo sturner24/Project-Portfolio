@@ -89,11 +89,16 @@ function openProject(n, { push = true } = {}) {
   $("#pDesc").innerHTML = (p.description || "")
     .split(/\n{2,}/)
     .filter(Boolean)
-    .map((para) =>
-      para.startsWith("## ")
-        ? `<h3>${escapeHTML(para.slice(3))}</h3>`
-        : `<p>${escapeHTML(para).replace(/\n/g, "<br>")}</p>`
-    )
+    .map((para) => {
+      if (para.startsWith("## ")) return `<h3>${escapeHTML(para.slice(3))}</h3>`;
+      const figs = para.split("\n").map((line) => line.match(/^!\[(.*)\]\((.+)\)$/));
+      if (figs.every(Boolean)) {
+        return `<div class="p-figs">${figs
+          .map(([, cap, src]) => `<figure><img src="${escapeHTML(src)}" alt="${escapeHTML(cap)}" loading="lazy" />${cap ? `<figcaption>${escapeHTML(cap)}</figcaption>` : ""}</figure>`)
+          .join("")}</div>`;
+      }
+      return `<p>${escapeHTML(para).replace(/\n/g, "<br>")}</p>`;
+    })
     .join("");
 
   $("#pGallery").innerHTML = rest

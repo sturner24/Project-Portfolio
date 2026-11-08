@@ -3,7 +3,8 @@
  *   date:        "YYYY-MM" or "YYYY" (used for sorting, newest first)
  *   summary:     one line shown on the card
  *   description: full write-up; leave a blank line between paragraphs,
- *                and start a paragraph with "## " to make it a heading
+ *                start a paragraph with "## " to make it a heading, and
+ *                use lines like ![caption](images/x.jpg) for a row of pictures
  *   tags:        shown on the card and used as filters
  *   images:      paths inside the images/ folder; the first one is the cover
  *   cover:       how many of the first images to show side by side at the top (default 1)
@@ -40,6 +41,8 @@ const PROJECTS = [
       "## Choosing a Material",
       "Since we are making the hub out of aluminum, we had to decide between 6061-T6 and 7075-T6. 7075-T6 has a yield strength of about 503 MPa compared to about 276 MPa for 6061-T6, and a fatigue strength of about 159 MPa compared to about 97 MPa.",
       "With the same exact design, just choosing different materials, the hub with 6061 aluminum weighs 0.637 lbs and the one with 7075 weighs 0.664 lbs. I ran FEA using both materials and the stress in the part pretty much stays the same between the two, because in a linear FEA study the stress comes from the shape of the part and the loads, not the material. The high stress spots, like on the arms of the hub, showed up with both materials. What changed was the factor of safety. With 7075, the same stress gave a factor of safety about 1.9, but with 6061 it was only about 1.0. This is due to the yield strength of 7075 being that much higher, and that extra margin is what let me take more material off and make the hub lighter. The weight difference between the two is really small, so we felt that the much higher strength was worth that little bit of extra weight.",
+      "![FEA with 7075-T6](images/front-wheel-hub-fea-7075.jpg)\n" +
+        "![FEA with 6061-T6](images/front-wheel-hub-fea-6061.jpg)",
 
       "## Manufacturing and Cost",
       "7075 costs more per pound than 6061, but for a part this small the extra material cost is small compared to the machining cost. While the judges at Baja competitions judge the cost to build the car, we felt that the strength of 7075 was definitely worth that little bit of extra money.",
@@ -49,10 +52,26 @@ const PROJECTS = [
 
       "## Setting up FEA",
       "I ran a static study in SolidWorks Simulation with 7075-T6 as the material. To represent the wheel, I made a disk that bolts to the hub and fixed it at its outer edge. I put the brake torque on the rotor bolt extrusions and the wheel loads on the shaft that goes into the upright. The wheel bolts were modeled with bolt connectors with preload. At first SolidWorks gave me a warning that contact wasn't defined for the bolt connectors, because by default it bonds all touching faces together, which means the bolts don't actually clamp anything. To fix this I added a local interaction set to Contact between the wheel disk and the faces of the hub arms. That way the bolts clamp the parts together and the faces can separate under load like they would in real life. I made the outer edge of the shaft that slides into the upright a bearing support and the face that is up against the upright a roller/slider. I also experimented with mesh controls to get a finer mesh in order to maximize the accuracy of the simulation.",
+      "![FEA setup for brake torque](images/front-wheel-hub-fea-setup-brake-torque.jpg)",
+      "![FEA setup for vertical loading](images/front-wheel-hub-fea-setup-vertical.jpg)\n" +
+        "![FEA setup for frontal loading](images/front-wheel-hub-fea-setup-frontal.jpg)",
+      "![Overall FEA setup](images/front-wheel-hub-fea-setup-overall.jpg)",
 
       "## Results and What I Changed",
       "In my original design, the radius of the arc between each of the four arms was 1.75 inches. After experimenting with numerous different radii, I found that the value with the highest factor of safety is 1.10 inches. With the 1.75 inch radius, there was also a stress concentration where the straight part of the arm meets the radius. Not only did the arc with radius of 1.10 inches yield a higher factor of safety, but it also dropped the weight of the hub from 0.712 lbs to 0.664 lbs.",
+      "![Arc radius of 1.75 in](images/front-wheel-hub-arc-radius-1-75.jpg)\n" +
+        "![Arc radius of 1.10 in](images/front-wheel-hub-arc-radius-1-10.jpg)",
       "Another thing that I changed was the support around the brake rotor hole extrusions. Originally, I simply just had a fillet surrounding it, and in the FEA there was a stress concentration that formed behind the hole. While it wasn't big, it was a concern for fatigue down the line. So to improve upon this, I decided to put an extrusion behind the hole, where the stress concentration was originally, and in doing this, it broke up the stress concentration and allowed the factor of safety to increase in that area. Since the weight only increased 0.001 lbs, from 0.663 lbs to 0.664 lbs, I felt that this was definitely a better design option.",
+      "![Prior design, fillet around brake rotor hole extrusions](images/front-wheel-hub-rotor-hole-prior.jpg)\n" +
+        "![Prior design, FEA](images/front-wheel-hub-rotor-hole-prior-fea.jpg)",
+      "![Current design, extrusion and fillet around brake rotor hole extrusions, only 0.001 lbs heavier than prior](images/front-wheel-hub-rotor-hole-current.jpg)\n" +
+        "![Current design, FEA](images/front-wheel-hub-rotor-hole-current-fea.jpg)",
+
+      "## Previous Hub Failure",
+      "The previous hub failed from fatigue in 2025, after a two year life span.",
+      "![](images/front-wheel-hub-failed-hub-1.jpg)\n" +
+        "![](images/front-wheel-hub-failed-hub-2.jpg)\n" +
+        "![](images/front-wheel-hub-failed-hub-3.jpg)",
 
       "## References",
       "1. P. Nehete, \"Design and Analysis of Wheel Hub of Baja ATV in Ansys,\" International Research Journal of Engineering and Technology (IRJET), Vol. 9, Issue 8, Aug. 2022. https://www.irjet.net/archives/V9/i8/IRJET-V9I8313.pdf\n" +
