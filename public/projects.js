@@ -16,12 +16,4 @@ const PROJECTS = [
     tags: ["Mechanical", "CAD"],
     images: ["images/sample-1.svg", "images/sample-2.svg"],
   },
-  {
-    title: "Another Sample",
-    date: "2025-11",
-    summary: "Second placeholder to show the grid layout.",
-    description: "Placeholder description.",
-    tags: ["Electronics"],
-    images: ["images/sample-2.svg"],
-  },
 ];
