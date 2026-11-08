@@ -8,7 +8,7 @@
  */
 const PROJECTS = [
   {
-    title: "Sample Project",
+    title: "Front Wheel Hub - Aztec Baja SAE",
     date: "2026-03",
     summary: "Placeholder. This will be replaced with a real project.",
     description:
