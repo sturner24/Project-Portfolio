@@ -89,7 +89,11 @@ function openProject(n, { push = true } = {}) {
   $("#pDesc").innerHTML = (p.description || "")
     .split(/\n{2,}/)
     .filter(Boolean)
-    .map((para) => `<p>${escapeHTML(para).replace(/\n/g, "<br>")}</p>`)
+    .map((para) =>
+      para.startsWith("## ")
+        ? `<h3>${escapeHTML(para.slice(3))}</h3>`
+        : `<p>${escapeHTML(para).replace(/\n/g, "<br>")}</p>`
+    )
     .join("");
 
   $("#pGallery").innerHTML = rest
